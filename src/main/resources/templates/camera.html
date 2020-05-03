@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Camera</title>
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="css/default.css" />
+	<link rel="stylesheet" type="text/css" href="css/scan.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/tiny-slider.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="/jslib-html5-camera-photo.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<style>
+		video {
+			width: 100%;
+		}
+		#loaderCover {
+			position: absolute;
+			background-color: rgba(195,195,195,0.9);
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+		}
+		.spinner-border {
+		  display: block;
+		  position: fixed;
+		  top: 50%;
+		  left: 50%;
+		}
+		main {
+		    position: absolute;
+    		z-index: 5555;
+    		top: 25px;
+    	}
+	</style>
+</head>
+<body>
+
+	<div id="loader" class="d-none">
+		<div id="loaderCover">
+			<div class="spinner-border" role="status">
+			  <span class="sr-only">Loading...</span>
+			</div>
+		</div>
+	</div>
+	
+    <main>
+        <section>
+            <div class="circles-wrapper">
+                <div class="main-circle">
+                    <div class="circle">
+                        <div class="circle-content">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="other-circles">
+                    <div class="circle circle1">
+                        <span class="circle-content">
+                            <i class="fas fa-question-circle"></i>
+                        </span>
+                        <span class="circle-text">Informações</span>
+                    </div>
+                    <div class="circle circle2">
+                        <span class="circle-content">
+                            <i class="fas fa-comments"></i>
+                        </span>
+                        <span class="circle-text">Avaliações</span>
+                    </div>
+                    <div class="circle circle3">
+                        <span class="circle-content">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </span>
+                        <span class="circle-text">Complementos</span>
+                    </div>
+                    <div class="circle circle4">
+                        <span class="circle-content">
+                            <i class="fas fa-shopping-bag"></i>
+                        </span>
+                        <span class="circle-text">Semelhantes</span>
+                    </div>
+                    <div class="circle circle5">
+                        <span class="circle-content">
+                            <i class="fas fa-search-dollar"></i>
+                        </span>
+                        <span class="circle-text">Comparar</span>
+                    </div>
+                    <div class="circle circle6">
+                        <span class="circle-content">
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="circle-text">Favoritar</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>		
+
+	<div class="container mt-1">
+
+		<button class="btn btn-danger mb-1 d-none" id="takePhotoId">Capturar</button>
+		<div id="cameraContainer">
+		<video id="videoId" class="embed-responsive-item" autoplay="true" playsInline></video>
+		</div>
+		<div id="resultado"></div>
+
+	</div>
+
+	<script>
+		var FACING_MODES = JslibHtml5CameraPhoto.FACING_MODES;
+		var IMAGE_TYPES = JslibHtml5CameraPhoto.IMAGE_TYPES;
+		
+		var videoElement = document.getElementById('videoId');
+		var takePhotoButtonElement = document.getElementById('takePhotoId');
+		var img = document.createElement('img');
+		
+		var cameraPhoto = new JslibHtml5CameraPhoto.default(videoElement);
+		
+		function startCameraDefaultResolution () {
+          var facingMode = "ENVIRONMENT";
+          cameraPhoto.startCamera(FACING_MODES[facingMode])
+            .then(() => {
+            	var botao = document.querySelector('#takePhotoId');
+            	botao.classList.remove('d-none');
+            })
+            .catch((error) => {
+              console.error('Camera not started!', error);
+              alert('Falha ao iniciar a câmera! Usa o Chrome? Concedeu permissão?')
+            });
+        }
+		
+        function takePhoto () { 
+        	takePhotoButtonElement.remove();
+        	
+           var sizeFactor = 1;
+           var imageType = IMAGE_TYPES.JPG;
+           var imageCompression = 1;
+
+           var config = {
+             sizeFactor,
+             imageType,
+             imageCompression
+           };
+
+           var dataUri = cameraPhoto.getDataUri(config);
+           sendRequest(dataUri);
+           
+           stopCamera ();
+           img.src = dataUri;
+           
+           
+           img.classList.add('img-fluid');
+		   var divCamera = document.querySelector('#cameraContainer');
+		   divCamera.innerHTML = '';
+		   divCamera.appendChild(img);  
+		   
+         }
+        
+        function stopCamera () {
+           cameraPhoto.stopCamera();
+         }   
+        
+        function showLoader() {
+        	var divLoader = document.querySelector('#loader');
+        	divLoader.classList.remove('d-none')
+        }    
+        
+        function hideLoader() {
+        	var divLoader = document.querySelector('#loader');
+        	divLoader.classList.add('d-none')
+        }    
+        
+        function sendRequest(data) {
+        	var token = $('meta[name=_csrf]').attr('content');
+        	var header = $('meta[name=_csrf_header]').attr('content');
+        	
+           	$.ajax({
+        		type: "post",
+        		url: "/processarFoto",
+        		data: { content: JSON.stringify(data)},
+        		beforeSend: function(xhr) {
+        			xhr.setRequestHeader(header, token);
+        			showLoader();
+        			$("#resultado").html("");
+        		},        		
+        		success: function(data) {        			
+        			hideLoader();
+        			$("#resultado").html(data);
+        		}        	
+        	});        	
+        }        
+        
+        document.addEventListener('DOMContentLoaded', function () {
+        	takePhotoButtonElement.onclick = takePhoto; 
+        		
+        	startCameraDefaultResolution();
+        });
+	</script>
+	<script src="js/navbar.js"></script>
+    <script src="js/circle.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,2 @@
+ALTER TABLE public.login_log
+  ADD COLUMN data_hora TIMESTAMP(0) WITHOUT TIME ZONE;

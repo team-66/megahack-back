@@ -1,0 +1,7 @@
+CREATE TABLE public.api_log (
+  id BIGSERIAL NOT NULL,
+  usuario VARCHAR(50) NOT NULL,
+  data_hora TIMESTAMP WITHOUT TIME ZONE,
+  item VARCHAR(10),
+  PRIMARY KEY(id)
+) 

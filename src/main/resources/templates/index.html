@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Hack 2º Edição - Desafio Universo Americanas / B2W</title>
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/tiny-slider.css">
+</head>
+
+<body>
+    <div class="nav-wrapper">
+        <nav class="navbar">
+            <!-- Mobile -->
+            <div class="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <!-- /Mobile -->
+            <ul class="nav">
+                <li class="nav-item"><a href="index.html"><i class="fas fa-home"></i> home</a></li>
+                <li class="nav-item"><a href="scan.html"><i class="fas fa-barcode"></i> escanear</a></li>
+                <li class="nav-item"><a th:href="@{/foto}"><i class="fas fa-camera"></i> foto</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <section>
+            <div class="red-header">
+                <h1>Bem-vindo!</h1>
+                <span>O que está procurando?</span>
+            </div>
+        </section>
+        <section>
+            <div class="my-slider">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+        </section>
+        <section>
+            <div class="red-header">
+                <h2>Que tal escanear um produto?</h2>
+            </div>
+        </section>
+        <section>
+            <a href="scan.html"><i class="fas fa-barcode fa-2x"></i></a>
+        </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/tiny-slider.js"></script>
+</body>
+
+</html>

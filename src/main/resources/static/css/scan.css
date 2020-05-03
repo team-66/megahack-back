@@ -1,0 +1,165 @@
+.nav-item:nth-child(2) a {
+    /* Nav ativo */
+    font-weight: bold;
+}
+
+/* Fundo */
+
+.body-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.body-overlay img {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+/* */
+
+section {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: start;
+}
+
+/* Botao Circular */
+
+.circles-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.circle {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    padding: 25px;
+    margin-top: -25px;
+    margin-left: -25px;
+    background: #e20413;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.circle:hover {
+    box-shadow: 0 0 1px 10px rgba(226, 4, 19, 0.1), 0 0 1px 20px rgba(226, 4, 19, 0.1);
+    transition: .3s;
+}
+
+.circle-text {
+    position: absolute;
+    margin-top: -15px;
+    margin-left: 40px;
+    font-weight: bold;
+    font-size: 20px;
+    visibility: hidden;
+    transition: visibility .5s;
+}
+
+.circle-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.circle-content {
+    font-size: 20px;
+}
+
+.other-circles {
+    position: absolute;
+    opacity: 0;
+    transition: .5s;
+}
+
+.other-circles-active {
+    opacity: 1;
+    transition: .5s;
+}
+
+.other-circles-active .circle-text {
+    visibility: visible;
+    transition: visibility 0s;
+}
+
+.other-circles-active .circle {
+    transition: .5s;
+}
+
+.other-circles-active .circle1 {
+    transform: translateY(75px);
+}
+
+.other-circles-active .circle2 {
+    transform: translateY(150px);
+}
+
+.other-circles-active .circle3 {
+    transform: translateY(225px);
+}
+
+.other-circles-active .circle4 {
+    transform: translateY(300px);
+}
+
+.other-circles-active .circle5 {
+    transform: translateY(375px);
+}
+
+.other-circles-active .circle6 {
+    transform: translateY(450px);
+}
+
+
+
+.main-circle {
+    z-index: 1;
+}
+
+.main-circle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.main-circle.main-circle-active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.main-circle.main-circle-active .bar:nth-child(1) {
+    -webkit-transform: translateY(8px) rotate(45deg);
+    -ms-transform: translateY(8px) rotate(45deg);
+    -o-transform: translateY(8px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
+}
+
+.main-circle.main-circle-active .bar:nth-child(3) {
+    -webkit-transform: translateY(-8px) rotate(-45deg);
+    -ms-transform: translateY(-8px) rotate(-45deg);
+    -o-transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* */
