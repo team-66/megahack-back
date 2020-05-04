@@ -1,6 +1,5 @@
 package com.github.team66.service;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -38,36 +37,6 @@ public class CloudVisionService {
 				}, LinkedHashMap::new));
 
 		return imageLabels;
-	}
-
-	public Map<String, String> extractPages(Resource recurso) {
-		
-		if (!apiLogService.podeAcessar())
-			throw new RuntimeException("Limite de acesso API");
-		
-		apiLogService.inserir("pages");
-		
-		AnnotateImageResponse response = this.cloudVisionTemplate.analyzeImage(recurso, Type.WEB_DETECTION);
-
-		Map<String, String> mapa = new HashMap<>();
-
-		response.getWebDetection().getPagesWithMatchingImagesList().forEach(p -> {
-			System.out.println(p.getUrl());
-			mapa.put(String.valueOf(Math.random()), p.getUrl());
-		});
-
-		return mapa;
-	}
-
-	public String extractText(Resource recurso) {
-		
-		if (!apiLogService.podeAcessar())
-			throw new RuntimeException("Limite de acesso API");
-		
-		apiLogService.inserir("text");
-		
-		String textFromImage = this.cloudVisionTemplate.extractTextFromImage(recurso);
-		return textFromImage;
 	}
 
 }

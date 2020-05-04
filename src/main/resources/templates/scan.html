@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/> 
+    <title>Mega Hack 2º Edição - Desafio Universo Americanas / B2W</title>
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <link rel="stylesheet" type="text/css" href="css/scan.css" />
+    <link rel="stylesheet" type="text/css" href="css/loader.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/tiny-slider.css">
+    <style>
+        video {
+            /*width: 100%;*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="oculto" id="loaderContainer">
+        <div class="loader"></div>
+    </div>
+    <div id="divCamera" class="body-overlay">
+        <video id="videoId" class="embed-responsive-item" autoplay="true" playsInline></video>
+        <!-- Fundo imagem 
+        <img src="" />-->
+    </div>
+    <div class="overlay"></div> <!-- Fundo escuro -->
+    <div class="nav-wrapper">
+        <nav class="navbar">
+            <!-- Mobile -->
+            <div class="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <!-- /Mobile -->
+            <ul class="nav">
+                <li class="nav-item"><a href="index.html"><i class="fas fa-home"></i> home</a></li>
+                <li class="nav-item"><a href="scan.html"><i class="fas fa-barcode"></i> escanear</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <section>
+            <div class="circles-wrapper">
+                <div class="main-circle">
+                    <div class="circle">
+                        <div class="circle-content">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="other-circles">
+                    <div class="circle circle1">
+                        <div class="show-text">
+                            <span class="circle-text">Informações</span>
+                            <span class="circle-content">
+                                <i class="fas fa-hashtag"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="circle circle2">
+                        <div class="show-text">
+                            <span class="circle-content">
+                                <i class="fas fa-hashtag"></i>
+                            </span>
+                            <span class="circle-text"><!--<a href="https://www.americanas.com.br/avaliacao/1661422201/iphone-se-128-gb-branco-4.7-ios-13-4g-12mp-apple">-->Avaliações<!--</a>--></span>
+                        </div>
+                    </div>
+                    <div class="circle circle3">
+                        <div class="show-text">
+                            <span class="circle-content">
+                                <i class="fas fa-hashtag"></i>
+                            </span>
+                            <span class="circle-text">Complementos</span>
+                        </div>
+                    </div>
+                    <div class="circle circle4">
+                        <div class="show-text">
+                            <span class="circle-content">
+                                <i class="fas fa-hashtag"></i>
+                            </span>
+                                <span class="circle-text"><!--<a href="https://www.americanas.com.br/hotsite/iphone_se">-->Semelhantes<!--</a>--></span>
+                        </div>
+                    </div>
+                    <div class="circle circle5">
+                        <div class="show-text">
+                            <span class="circle-content">
+                                <i class="fas fa-hashtag"></i>
+                            </span>
+                            <span class="circle-text">Comparar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/circle.js"></script>
+
+    <!-- Camera -->
+    <script src="js/jslib-html5-camera-photo.min.js"></script>
+    <script src="js/scan.js"></script>
+</body>
+
+</html>
